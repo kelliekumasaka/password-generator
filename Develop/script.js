@@ -1,6 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var userNumber, smallAlphabet, bigAlphabet, numbers, differentCharacters;
+var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, randomItems, errorMessage;
 var userInput = []
 var numeric = ["1", "2","3","4","5","6","7","8","9","0" ]
 var lowercase = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -9,7 +9,7 @@ var specialCharacters = ['!','"','#','$','%','&',"'",'(',')','*','+',',','-','.'
 
 // Write password to the #password input
 function writePassword() {
-  userAnswers ();
+  userQuestions();
   if(smallAlphabet) {
     userInput = userInput.concat(lowercase);
   } 
@@ -19,27 +19,34 @@ function writePassword() {
   if(numbers) {
     userInput = userInput.concat(numeric);
   }
-  if(differentCharacters) {
+  if(specialAlphabet) {
     userInput = userInput.concat(specialCharacters)
   }
-  for (let i = 0; i < userNumber; i++){
-    console.log(Math.floor(Math.random() * userInput.length))
+  if (!smallAlphabet && !bigAlphabet && !numbers && !specialAlphabet){
+    console.log("Please select at least one")
   }
- 
+  if (userNumber > 128 || userNumber < 8){
+    errorMessage = alert("Please enter a valid number")
+  }
+  for (let i = 0; i < userNumber; i++){
+    console.log(randomItems = userInput [Math.floor(Math.random() * userInput.length)])
+  }
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
-function userAnswers() {
+
+function userQuestions() {
   userNumber = prompt("How many characters in password? Enter a number between 8 and 128");
-  smallAlphabet = confirm("Would you like to include lowercase letters?")
-  bigAlphabet = confirm("Would you like to include uppercase letters?")
-  numbers = confirm("Would you like to include numbers?")
-  differentCharacters = confirm("Would you like to include special characters?")
+  smallAlphabet = confirm("Would you like to include lowercase letters?");
+  bigAlphabet = confirm("Would you like to include uppercase letters?");
+  numbers = confirm("Would you like to include numbers?");
+  specialAlphabet = confirm("Would you like to include special characters?");
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
@@ -57,7 +64,7 @@ function generatePassword() {
 
 // WHEN prompted for the length of the password
 // THEN I choose a length of at least 8 characters and no more than 128 characters
-// 🚩TODO: ask the user how many characters they want in password --> use a prompt which will be set to a var --> console.log(passwordlength) --> make sure the info is correct --> number --> 8+ or 128-
+// 🚩TODO: ask the user how many characters they want in password --> use a prompt which will be set to a var --> console.log(passwordlength) --> make sure the info is correct --> IF number is not between 8 and 128, THEN alert and start over --> 8+ or 128-
 
 
 // THEN I am presented with a series of prompts for password criteria
