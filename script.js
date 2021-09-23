@@ -1,24 +1,26 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, randomItems, numberError, characterError, underlineNine;
-var userInput = []
-var numeric = ["1", "2","3","4","5","6","7","8","9","0" ]
-var lowercase = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-var uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-var specialCharacters = ['!','"','#','$','%','&',"'",'(',')','*','+',',','-','.','/',':',';','<','>',"=",'?','@','[',']','^','_','`','{','}',"|","~"]
+var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, numberError, characterError, underlineNine;
+var userInput = [];
+var numeric = ["1", "2","3","4","5","6","7","8","9","0" ];
+var lowercase = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+var specialCharacters = ['!','"','#','$','%','&',"'",'(',')','*','+',',','-','.','/',':',';','<','>',"=",'?','@','[',']','^','_','`','{','}',"|","~"];
 userNumber = 0;
 var ask =true;
+var randomItems = [];
+
 // Write password to the #password input
 function writePassword() {
   getPasswordLength();
-  getUserInputs();
 
   for (let i = 0; i < userNumber; i++){
     randomItems = userInput [Math.floor(Math.random() * userInput.length)];
     console.log(randomItems);
+    randomItems.push(password)
   }
 
-  var password = generatePassword();
+  var password;
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -53,14 +55,19 @@ function getUserInputs() {
 
 
 function getPasswordLength() {
+  ask=true
   while (ask){
     userNumber = prompt("How many characters in password? Enter a number between 8 and 128");
-  if (userNumber < 128 && userNumber > 8){
-    
-    ask=false;
-  }else{
-    alert("Please enter a valid number");
-  }
+    if (userNumber < 128 && userNumber > 8){
+      ask=false;
+      getUserInputs();
+    }else if (userNumber > 128 || userNumber < 8 || userNumber == "string"){
+      alert("Please enter a valid number");
+    }else{
+      alert("Goodbye")
+      ask=false;
+    }
+
   }
 }
 
@@ -69,15 +76,11 @@ function getPasswordLength() {
 generateBtn.addEventListener("click", writePassword);
 
 
-
 // console.log driven development
 
 // GIVEN I need a new, secure password
 // WHEN I click the button to generate a password
 // 🚩TODO: write the generatePassword function
-function generatePassword() {
-
-}
 
 // WHEN prompted for the length of the password
 // THEN I choose a length of at least 8 characters and no more than 128 characters
