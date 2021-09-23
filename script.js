@@ -57,17 +57,18 @@ function getPasswordLength() {
   ask=true
   while (ask){
     userNumber = prompt("How many characters in password? Enter a number between 8 and 128");
-    if (userNumber < 128 && userNumber > 8){
+    if (userNumber === null){
+      alert("Goodbye");
+      return;
+    }else if(userNumber < 128 && userNumber > 8){
       ask=false;
       getUserInputs();
-    }else if (userNumber > 128 || userNumber < 8 || userNumber == "string"){
+    }else if (userNumber >= 128 || userNumber <= 8){
       alert("Please enter a valid number");
-    }else{
-      alert("Goodbye")
-      ask=false;
+    }else if (userNumber = "a") {
+      alert("Please enter a valid number")
     }
-
-  }
+  }  
 }
 
 
@@ -109,4 +110,4 @@ generateBtn.addEventListener("click", writePassword);
 
 // WHEN the password is generated
 // THEN the password is either displayed written to the page
-// 🚩TODO: take our return array and use array methods to convert to a string --> have a var for this and return string clo this
+// 🚩TODO: take our return array and use array methods to convert to a string --> have a var for this and return string clo 
