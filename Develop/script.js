@@ -1,35 +1,21 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, randomItems, errorMessage;
+var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, randomItems, numberError, characterError, underlineNine;
 var userInput = []
 var numeric = ["1", "2","3","4","5","6","7","8","9","0" ]
 var lowercase = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 var uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 var specialCharacters = ['!','"','#','$','%','&',"'",'(',')','*','+',',','-','.','/',':',';','<','>',"=",'?','@','[',']','^','_','`','{','}',"|","~"]
-
+userNumber = 0;
+var ask =true;
 // Write password to the #password input
 function writePassword() {
-  userQuestions();
-  if(smallAlphabet) {
-    userInput = userInput.concat(lowercase);
-  } 
-  if(bigAlphabet) {
-    userInput = userInput.concat(uppercase);
-  }
-  if(numbers) {
-    userInput = userInput.concat(numeric);
-  }
-  if(specialAlphabet) {
-    userInput = userInput.concat(specialCharacters)
-  }
-  if (!smallAlphabet && !bigAlphabet && !numbers && !specialAlphabet){
-    console.log("Please select at least one")
-  }
-  if (userNumber > 128 || userNumber < 8){
-    errorMessage = alert("Please enter a valid number")
-  }
+  getPasswordLength();
+  getUserInputs();
+
   for (let i = 0; i < userNumber; i++){
-    console.log(randomItems = userInput [Math.floor(Math.random() * userInput.length)])
+    randomItems = userInput [Math.floor(Math.random() * userInput.length)];
+    console.log(randomItems);
   }
 
   var password = generatePassword();
@@ -38,13 +24,44 @@ function writePassword() {
   passwordText.value = password;
 }
 
+function getUserInputs() {
+  ask=true
+  while (ask){
+    smallAlphabet = confirm("Would you like to include lowercase letters?");
+    bigAlphabet = confirm("Would you like to include uppercase letters?");
+    numbers = confirm("Would you like to include numbers?");
+    specialAlphabet = confirm("Would you like to include special characters?");
+    if(!smallAlphabet && !bigAlphabet && !numbers && !specialAlphabet){
+      alert("Please select at least one")
+    }else{
+      if(smallAlphabet) {
+        userInput = userInput.concat(lowercase)
+      }
+      if(bigAlphabet) {
+        userInput = userInput.concat(uppercase)
+      }
+      if(numbers) {
+        userInput = userInput.concat(numeric)
+      }
+      if(specialAlphabet) {
+        userInput = userInput.concat(specialCharacters)
+      }
+      ask=false
+    }
+  }
+}
 
-function userQuestions() {
-  userNumber = prompt("How many characters in password? Enter a number between 8 and 128");
-  smallAlphabet = confirm("Would you like to include lowercase letters?");
-  bigAlphabet = confirm("Would you like to include uppercase letters?");
-  numbers = confirm("Would you like to include numbers?");
-  specialAlphabet = confirm("Would you like to include special characters?");
+
+function getPasswordLength() {
+  while (ask){
+    userNumber = prompt("How many characters in password? Enter a number between 8 and 128");
+  if (userNumber < 128 && userNumber > 8){
+    
+    ask=false;
+  }else{
+    alert("Please enter a valid number");
+  }
+  }
 }
 
 
