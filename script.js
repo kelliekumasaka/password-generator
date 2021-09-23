@@ -1,6 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, numberError, characterError, underlineNine;
+var userNumber, smallAlphabet, bigAlphabet, numbers, specialAlphabet, numberError, characterError, underlineNine, password;
 var userInput = [];
 var numeric = ["1", "2","3","4","5","6","7","8","9","0" ];
 var lowercase = ["a",'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -15,15 +15,14 @@ function writePassword() {
   getPasswordLength();
 
   for (let i = 0; i < userNumber; i++){
-    randomItems = userInput [Math.floor(Math.random() * userInput.length)];
-    console.log(randomItems);
-    randomItems.push(password)
+    randomItems.push (userInput [Math.floor(Math.random() * userInput.length)]);
+    // console.log(randomItems);
+    // randomItems.push("#password")
   }
-
-  var password;
+  console.log(randomItems)
+  var stringItems = randomItems.join("");
   var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  passwordText.value = stringItems;
 }
 
 function getUserInputs() {
