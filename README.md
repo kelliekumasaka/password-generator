@@ -18,11 +18,11 @@ If you decide that you do not want a password, your window will show the followi
 
 When you do want to have a password generated, after going through all of the prompts, your password will be generated!
 
-![Password generator page with random password in box](./assets/images/password.png)
+![Password generator page with random password in box](Assets/images/password.png)
 
 If you decide that you want another password made for you, your old password will stay, but will be replaced after going through all of the prompts.
 
-![Password generator page with old password and pop up asking whether or not user wants uppercase letters](./assets/images/questionwindow.png)
+![Password generator page with old password and pop up asking whether or not user wants uppercase letters](Assets/images/questionwindow.png)
 
 ## Summary
 
